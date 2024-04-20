@@ -2,19 +2,20 @@ import pandas as pd
 import requests
 import datetime
 
-
-
+# Enter desired symbol and parameters
 symbol = 'LTCUSDT'
 interval = '1h'
 limit = 100 #1000 Max
-coin = 1
 
 # Initialize an empty list to store data
 data_list = []
 
+# Requesting data from binance
 url_klines = f'https://api.binance.com/api/v3/klines?symbol={symbol}&interval={interval}&limit={limit}'
 kline_response = requests.get(url_klines)
 kline_data = kline_response.json()
+
+# Creating object from recieved data
 for kline_item in kline_data:
     timestamp = int(kline_item[0])
     dt_object = datetime.datetime.fromtimestamp(timestamp / 1000)
